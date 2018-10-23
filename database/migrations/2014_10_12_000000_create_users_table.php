@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email',255 )->unique();
             $table->string('password');
-            $table->integer('reputation');
-            $table->integer('visits_number');
-            $table->string('logo_path');
+            $table->integer('reputation')->nullable();
+            $table->integer('visits_number')->nullable();
+            $table->string('logo_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

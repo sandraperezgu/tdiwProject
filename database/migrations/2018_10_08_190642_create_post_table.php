@@ -21,7 +21,7 @@ class CreatePostTable extends Migration
             $table->integer('rate_number');
             $table->timestamps();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('post_id');
+            $table->unsignedInteger('post_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_id')->references('id')->on('post');
         });

@@ -17,10 +17,18 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
-Route::get('/phpregister', function () {
+Route::get('/register', function () {
     return view('auth.register');
 });
 
+Auth::routes();
+Route::get('api/post','PostController@getData');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/post/{id}', function($id){
+    $post = App\Post::where('id', $id)->firstOrFail();
+
+    return view('post', ['post' => $post]);
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

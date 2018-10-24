@@ -20,6 +20,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        "visits_number"=>0,
+        "reputation"=>0
     ];
 });
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
@@ -29,7 +31,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'status'=>1,
         "user_id"=>1,
         "post_id"=>null,
-        "visits_number"=>0
+        "rate_number"=>0
     ];
 });
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {

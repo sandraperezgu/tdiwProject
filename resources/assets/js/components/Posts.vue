@@ -1,11 +1,14 @@
 <template>
     <div class="container">
+        <h1>Last Posts</h1>
+        <hr class="separator" />
         <div class="row">
             <div class="col-xs-12" v-for="item in posts">
                 <div class="post_container margin20bottom">
                     <a v-bind:href="'post/'+item.id">
                         <div class="row"><div class="col-md-12">
-                                <span>{{ item.title }}</span>
+                            <span v-if="item.status == 0">(CLOSED) {{ item.title }}</span>
+                            <span v-else>{{ item.title }}</span>
                             </div>
                         </div>
 
@@ -13,8 +16,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="text-center">
         <pagination :pagination="pagination" :callback="fetchPosts" :options="paginationOptions"></pagination>
     </div>
 </template>

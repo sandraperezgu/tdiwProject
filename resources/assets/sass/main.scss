@@ -1,7 +1,31 @@
 @import "variables";
 .post_container{
   border: 1px solid $brand-primary;
+  padding: 15px;
+}
+.separator{
+  border-color: $brand-primary;
 }
 .margin20bottom{
   margin-bottom: 20px;
+}
+.margin20top{
+  margin-top: 20px;
+}
+.question-box{
+  border-bottom: 1px solid $brand-primary;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.answerContainer, #showFormAnswer{
+  cursor:pointer;
+}
+.correctOne{
+  color: $brand-success;
+  text-decoration: underline;
+}
+.voteContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -24,11 +24,16 @@ Route::get('/register', function () {
 Auth::routes();
 Route::get('api/post','PostController@getData');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/new_post', function () {
+    return view('new_post');
+})->name('new_post');
+Route::post('/new_post', 'PostController@createPost')->name('new_post');
 Route::get('/post/{id}', function($id){
     $post = App\Post::where('id', $id)->firstOrFail();
-
-    return view('post', ['post' => $post]);
-});
-Auth::routes();
-
+    $comments = App\Post::where("post_id", "=", $id)->get();
+    return view('post', ['post' => $post,'comments'=>$comments]);
+})->name('post');
+Route::post('/setanswer','PostController@setAnswer');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
+Route::post('/new_answer/{id}', 'PostController@newAnswer');

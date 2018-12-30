@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -74,45 +67,47 @@
             showAutocompleteOnFocus: true
         });
 
-        $('#formCreatePost').on('submit', function(event){
-            event.preventDefault();
-            if($.trim($('#title').val()).length == 0)
-            {
-                alert("Please enter Title");
-                return false;
+        /* $('#formCreatePost').on('submit', function(event){
+             event.preventDefault();
+             if($.trim($('#title').val()).length == 0)
+             {
+                 alert("Please enter Title");
+                 return false;
+             }
+             else if($.trim($('#description').val()).length == 0)
+             {
+                 alert("Please enter Tag(s)");
+                 return false;
+             }
+             else
+             {
+
+
+               /*var form_data = $(this).serialize();
+                 $('#submit').attr("disabled","disabled");
+                 $.ajax({
+                     url:"insert.php",
+                     method:"POST",
+                     data:form_data,
+                     beforeSend:function(){
+                         $('#submit').val('Submitting...');
+                     },
+                     success:function(data){
+                         if(data != '')
+                         {
+                             $('#name').val('');
+                             $('#tag').tokenfield('setTokens',[]);
+                             $('#success_message').html(data);
+                             $('#submit').attr("disabled", false);
+                             $('#submit').val('Submit');
+                         }
+                     }
+                 });
+                 setInterval(function(){
+                     $('#success_message').html('');
+                 }, 5000);
             }
-            else if($.trim($('#description').val()).length == 0)
-            {
-                alert("Please enter Tag(s)");
-                return false;
-            }
-            else
-            {
-                var form_data = $(this).serialize();
-                $('#submit').attr("disabled","disabled");
-                $.ajax({
-                    url:"insert.php",
-                    method:"POST",
-                    data:form_data,
-                    beforeSend:function(){
-                        $('#submit').val('Submitting...');
-                    },
-                    success:function(data){
-                        if(data != '')
-                        {
-                            $('#name').val('');
-                            $('#tag').tokenfield('setTokens',[]);
-                            $('#success_message').html(data);
-                            $('#submit').attr("disabled", false);
-                            $('#submit').val('Submit');
-                        }
-                    }
-                });
-                setInterval(function(){
-                    $('#success_message').html('');
-                }, 5000);
-            }
-        });
+        });*/
 
     });
 </script>

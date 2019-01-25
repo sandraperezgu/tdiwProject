@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -134,6 +135,20 @@ class PostController extends Controller
             $post->user_id = Auth::user()->id;
             $post->rate_number = 0;
             $post->save();
+
+            if(isset($_POST['tag'])){
+
+                $tags = explode(',', $_POST['tag']);
+
+                foreach($tags as $tag){
+                    // Falta controlar que no se inserten los que ya están en BBDD
+                    $newTag = new Tag;
+                    $newTag->name = $tag;
+                    $newTag->save();
+                }
+
+            }
+
             return redirect()->route('post', ['id' => $post->id]);
         }else{
             return redirect('home');

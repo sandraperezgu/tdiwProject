@@ -8,11 +8,11 @@
                 <div class="panel-heading">Create new Post</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('new_post') }}">
+                    <form class="form-horizontal" id="formCreatePost" method="POST" action="{{ route('new_post') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">title</label>
+                            <label for="title" class="col-md-4 control-label">Title</label>
 
                             <div class="col-md-6">
                                 <textarea class="form-control" rows="2" name="title" id="title"></textarea>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">description</label>
+                            <label for="description" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
                                 <textarea class="form-control" rows="5" name="description" id="description"></textarea>
@@ -37,8 +37,14 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-4 control-label">Tags</label>
+                            <div class="col-md-6">
+                                <input type="text" name="tag" id="tag" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="submit" class="btn btn-primary">
                                     Create
                                 </button>
                             </div>
@@ -49,4 +55,61 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+
+        $('#tag').tokenfield({
+            autocomplete:{
+                source: ['PHP','Codeigniter','HTML','JQuery','Javascript','CSS','Laravel','CakePHP','Symfony','Yii 2','Phalcon','Zend','Slim','FuelPHP','PHPixie','Mysql'],
+                delay:100
+            },
+            showAutocompleteOnFocus: true
+        });
+
+        /* $('#formCreatePost').on('submit', function(event){
+             event.preventDefault();
+             if($.trim($('#title').val()).length == 0)
+             {
+                 alert("Please enter Title");
+                 return false;
+             }
+             else if($.trim($('#description').val()).length == 0)
+             {
+                 alert("Please enter Tag(s)");
+                 return false;
+             }
+             else
+             {
+
+
+               /*var form_data = $(this).serialize();
+                 $('#submit').attr("disabled","disabled");
+                 $.ajax({
+                     url:"insert.php",
+                     method:"POST",
+                     data:form_data,
+                     beforeSend:function(){
+                         $('#submit').val('Submitting...');
+                     },
+                     success:function(data){
+                         if(data != '')
+                         {
+                             $('#name').val('');
+                             $('#tag').tokenfield('setTokens',[]);
+                             $('#success_message').html(data);
+                             $('#submit').attr("disabled", false);
+                             $('#submit').val('Submit');
+                         }
+                     }
+                 });
+                 setInterval(function(){
+                     $('#success_message').html('');
+                 }, 5000);
+            }
+        });*/
+
+    });
+</script>
+
 @endsection

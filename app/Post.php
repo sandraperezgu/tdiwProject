@@ -10,7 +10,7 @@ class Post extends Model
     const OPEN_POST = 1;
     const SELECTED_ANSWER = 2;
     public function tags(){
-        return $this->belongsToMany("Tag")->using("TagPost");
+        return $this->belongsToMany(Tag::class)->using(TagPost::class);
     }
     protected $table = 'post';
 }

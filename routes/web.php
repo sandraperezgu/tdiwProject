@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostController@index');
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -28,12 +26,15 @@ Route::get('/new_post', function () {
     return view('new_post');
 })->name('new_post');
 Route::post('/new_post', 'PostController@createPost')->name('new_post');
-Route::get('/post/{id}', function($id){
-    $post = App\Post::where('id', $id)->firstOrFail();
-    $comments = App\Post::where("post_id", "=", $id)->get();
-    return view('post', ['post' => $post,'comments'=>$comments]);
-})->name('post');
+Route::get('/post/{id}', 'PostController@show')->name('post');
+
 Route::post('/setanswer','PostController@setAnswer');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
 Route::post('/new_answer/{id}', 'PostController@newAnswer');
+
+Route::get('/profile', 'ProfileController@profile')->name('profile');
+
+
+
+

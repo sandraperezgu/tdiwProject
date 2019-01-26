@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <posts></posts>
+    <posts :datanumbersofposts="{{ $numberOfPosts->toJson() }}"></posts>
 @endsection

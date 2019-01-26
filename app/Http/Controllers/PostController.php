@@ -34,7 +34,11 @@ class PostController extends Controller
      */
     public function getData()
     {
-        $posts =  Post::where('post_id', '=', NULL)->latest()->paginate(15);
+        $num_posts = 15;
+        $pages = $_GET['page'];
+        $page_multiplier = $pages - 1;
+        $skip = $page_multiplier*$num_posts;
+        $posts =  Post::where('post_id', '=', NULL)->skip($skip)->paginate($num_posts);
         return JsonResponse::fromJsonString($posts);
     }
 
@@ -147,6 +151,13 @@ class PostController extends Controller
             return redirect('home');
         }
 
+    }
+    /* Recieves title by GET, get 3 first ones and return them as array.*/
+    public function searchPost(){
+        $title = $_GET['title'];
+        $limit = (isset($_GET['limit']) && $_GET['limit']) ? $_GET['limit'] : 3;
+        $posts =  Post::where('title', 'LIKE', '%'.$title.'%')->limit($limit)->get();
+        return JsonResponse::fromJsonString($posts);
     }
     public function createPost(){
         if(isset($_POST['title']) && Auth::check()){

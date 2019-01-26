@@ -21,20 +21,15 @@ Route::get('/register', function () {
 
 Auth::routes();
 Route::get('api/post','PostController@getData');
+Route::get('/search_post', 'PostController@searchPost')->name('search_post');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/new_post', function () {
     return view('new_post');
 })->name('new_post');
 Route::post('/new_post', 'PostController@createPost')->name('new_post');
 Route::get('/post/{id}', 'PostController@show')->name('post');
-
 Route::post('/setanswer','PostController@setAnswer');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
 Route::post('/new_answer/{id}', 'PostController@newAnswer');
-
 Route::get('/profile', 'ProfileController@profile')->name('profile');
-
-
-
-

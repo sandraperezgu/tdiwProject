@@ -359,3 +359,15 @@ ul.tags li a {
   background-color: #db7a7a;
 }
 
+#search_layer {
+  background-color: white;
+  border: 1px solid black;
+  position: fixed;
+}
+
+#search_layer div {
+  border-bottom: 1px solid black;
+  max-height: 40px;
+  overflow: hidden;
+}
+

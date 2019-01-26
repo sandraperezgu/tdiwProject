@@ -1,7 +1,8 @@
 <template>
 
     <div class="container">
-        <h1>Last Posts</h1>
+        <h1>Last Posts <input type="search" id="name_search" class="form-control" placeholder="Search questions by title..." style="margin-top: 10px;" />
+        </h1>
         <hr class="separator"/>
         <div class="row">
             <div class="col-lg-8 col-md-8" >
@@ -59,12 +60,15 @@
                 </div>
             </div>
         </div>
+        <b-pagination align="center" size="md" :total-rows="items" v-model="currentPage" :per-page="per_page">
+        </b-pagination>
     </div>
 
 </template>
 
 <script>
     export default {
+
         mounted() {
             console.log('posts, posts nowhere');
         },
@@ -75,11 +79,13 @@
         },
         data: function () {
             return {
-                items: [],
+                items: 0,
                 posts: [],
+                currentPage: 1,
+                per_page: 15,
                 pagination: {
                     total: 0,
-                    per_page: 5,    // required
+                    per_page: 15,    // required
                     current_page: 1, // required
                     last_page: 0,    // required
                     from: 1,
@@ -93,6 +99,22 @@
                 }
             }
         },
+        watch: {
+            /**
+             * When prop currentPage updated
+             * react to it
+             */
+            currentPage(newVal) {
+                axios.get('/api/post?page=' + newVal).then((response) => {
+                    console.log(response);
+                    this.posts = response.data.data;
+                    this.pagination = response.data;
+                    this.items = response.data.total;
+                }, error => {
+                    //Error Handling
+                });
+            }
+        },
         created: function () {
             this.fetchPosts();
         },
@@ -104,16 +126,17 @@
                     console.log(response);
                     this.posts = response.data.data;
                     this.pagination = response.data;
+                    this.items = response.data.total;
                 }, error => {
                     //Error Handling
                 });
-            }
-        },
-        components: {
-            pagination: require('vue-bootstrap-pagination'),
+            },
+
         }
     }
+    import bPagination from 'bootstrap-vue/es/components/pagination/pagination';
 
+    Vue.component('b-pagination', bPagination);
 </script>
 <style scoped>
 </style>

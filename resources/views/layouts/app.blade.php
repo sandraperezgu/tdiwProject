@@ -43,8 +43,10 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+
+                    <ul id="search_nav" class="nav navbar-nav">
+                        <input type="search" id="q-search" class="form-control" placeholder="Search questions..." style="margin-top: 10px;" />
+                        <div id="search_layer" style="display:none;"></div>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,8 +87,12 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        var url = "{{route('search_post')}}";
+        var post = "{{route('post',['id'=>1])}}";
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>

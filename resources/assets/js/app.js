@@ -16,6 +16,7 @@ window.$ = require('jquery')
  */
 Vue.component('posts', require('./components/Posts.vue'));
 Vue.component('post-detail', require('./components/Post.vue'));
+
 const app = new Vue({
     el: '#app'
 });

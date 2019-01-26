@@ -7,9 +7,25 @@ use App\Tag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $tags = DB::table('tag')->get();
+        $numberOfPosts = DB::table('post_tag')
+            ->select('tag_id', DB::raw('count(*) as total'))
+            ->groupBy('tag_id')
+            ->get();
+
+        return view('welcome', ['tags'=> $tags, 'numberOfPosts'=> $numberOfPosts]);
+    }
 
     /**
      * Show posts
@@ -21,6 +37,7 @@ class PostController extends Controller
         $posts =  Post::where('post_id', '=', NULL)->latest()->paginate(15);
         return JsonResponse::fromJsonString($posts);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,10 +67,15 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::with('')->findOrFail($id);
+
+        $tags = DB::table('tag')->get();
+        $post = Post::where('id', $id)->firstOrFail();
         $comments = Post::where("post_id", "=", $id)->get();
-        $data = array('post'=>$post,'comments'=>$comments);
-        return $data;
+        $numberOfPosts = DB::table('post_tag')
+            ->select('tag_id', DB::raw('count(*) as total'))
+            ->groupBy('tag_id')
+            ->get();
+        return view('post', ['post' => $post,'comments'=>$comments, 'tags'=>$tags, 'numberOfPosts'=> $numberOfPosts]);
     }
 
     /**
@@ -142,12 +164,20 @@ class PostController extends Controller
 
                 foreach($tags as $tag){
                     // Falta controlar que no se inserten los que ya están en BBDD
-                    $newTag = new Tag;
-                    $newTag->name = $tag;
-                    $newTag->save();
+                    $newTag = Tag::where("name", "=", $tag)->first();
+
+                    if (!$newTag){
+                        $newTag = new Tag;
+                        $newTag->name = $tag;
+                        $newTag->save();
+                    }
+
                 }
 
+                $post->tags()->attach($tags);
             }
+
+            $post->save();
 
             return redirect()->route('post', ['id' => $post->id]);
         }else{

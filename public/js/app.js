@@ -11779,6 +11779,7 @@ window.$ = __webpack_require__(3);
  */
 Vue.component('posts', __webpack_require__(41));
 Vue.component('post-detail', __webpack_require__(48));
+
 var app = new Vue({
   el: '#app'
 });
@@ -43556,7 +43557,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43622,12 +43623,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('posts, posts nowhere');
     },
 
+    props: {
+        datanumbersofposts: {
+            type: Array
+        }
+    },
     data: function data() {
         return {
             items: [],
@@ -43770,46 +43819,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("h1", [_vm._v("Last Posts")]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "separator" }),
-      _vm._v(" "),
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", [_vm._v("Last Posts")]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "separator" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "row" },
+        { staticClass: "col-lg-8 col-md-8" },
         _vm._l(_vm.posts, function(item) {
-          return _c("div", { staticClass: "col-xs-12" }, [
-            _c("div", { staticClass: "post_container margin20bottom" }, [
-              _c("a", { attrs: { href: "post/" + item.id } }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-12" }, [
+          return _c("div", { staticClass: "post" }, [
+            _c("div", { staticClass: "wrap-ut pull-left" }, [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "posttext pull-left" }, [
+                _c("h2", [
+                  _c("a", { attrs: { href: "post/" + item.id } }, [
                     item.status == 0
                       ? _c("span", [_vm._v("(CLOSED) " + _vm._s(item.title))])
                       : _c("span", [_vm._v(_vm._s(item.title))])
                   ])
-                ])
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(item.description))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "postinfo pull-left" }, [
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "ranking" }, [
+                _c("i", { staticClass: "glyphicon glyphicon-star" }),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(item.rate_number) +
+                    "\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "created_at" }, [
+                _c("i", { staticClass: "glyphicon glyphicon-time" }),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(item.created_at) +
+                    "\n                    "
+                )
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
           ])
         })
       ),
       _vm._v(" "),
-      _c("pagination", {
-        attrs: {
-          pagination: _vm.pagination,
-          callback: _vm.fetchPosts,
-          options: _vm.paginationOptions
-        }
-      })
-    ],
-    1
-  )
+      _c("div", { staticClass: "col-lg-4 col-md-4" }, [
+        _c("div", { staticClass: "sidebarblock" }, [
+          _c("h3", [_vm._v("Tags")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "divline" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "blocktxt" }, [
+            _c(
+              "ul",
+              { staticClass: "tags" },
+              _vm._l(_vm.datanumbersofposts, function(item) {
+                return _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(item.tag_id)),
+                    _c("span", { staticClass: "badge pull-right" }, [
+                      _vm._v(_vm._s(item.total))
+                    ])
+                  ])
+                ])
+              })
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "userinfo pull-left" }, [
+      _c("div", { staticClass: "avatar" }, [
+        _c("img", { attrs: { src: "images/avatar.jpg", alt: "" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "status green" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "comments" }, [
+      _c("div", { staticClass: "commentbg" }, [
+        _vm._v("\n                            0\n                            "),
+        _c("div", { staticClass: "mark" })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -43905,7 +44022,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43916,6 +44033,52 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43985,6 +44148,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         user: {
             type: Number
+        },
+        datanumbersofposts: {
+            type: Array
         }
     },
     methods: {
@@ -43998,6 +44164,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         showForm: function showForm() {
+            window.$('#form_test').appendTo('#cont');
             window.$('#form_test').show();
         }
     }
@@ -44012,125 +44179,237 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("div", { staticClass: "col-xs-12" }, [
-        _vm.datapost.status == 0
-          ? _c("h1", [_vm._v("(CLOSED) " + _vm._s(_vm.datapost.title))])
-          : _c("h1", [_vm._v(_vm._s(_vm.datapost.title))]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row question-box" }, [
-          _c("hr", { staticClass: "separator" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-xs-12" }, [
-            _c("div", { staticClass: "col-xs-1 voteContainer" }, [
-              _c("span", {
-                staticClass: "glyphicon glyphicon-triangle-top",
-                attrs: { id: "voteUp", "aria-hidden": "true" }
-              }),
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      { staticClass: "col-lg-8 col-md-8", attrs: { id: "cont" } },
+      [
+        _c("div", { staticClass: "post" }, [
+          _c("div", { staticClass: "topwrap" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "posttext pull-left" }, [
+              _vm.datapost.status == 0
+                ? _c("h2", [_vm._v("(CLOSED) " + _vm._s(_vm.datapost.title))])
+                : _c("h2", [_vm._v(_vm._s(_vm.datapost.title))]),
               _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "reputation_score",
-                  attrs: { id: "reputation", "aria-hidden": "true" }
-                },
-                [_vm._v(_vm._s(_vm.datapost.rate_number))]
-              ),
-              _vm._v(" "),
-              _c("span", {
-                staticClass: "glyphicon glyphicon-triangle-bottom",
-                attrs: { id: "voteDown", "aria-hidden": "true" }
-              })
+              _c("p", [_vm._v(_vm._s(_vm.datapost.description))])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-xs-11" }, [
-              _c("span", [_vm._v(_vm._s(_vm.datapost.description))])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.datacomments.length == 0
-        ? _c("h2", { staticClass: "margin20top" }, [_vm._v("No answers yet!")])
-        : _c("h2", { staticClass: "margin20top" }, [
-            _vm._v(_vm._s(_vm.datacomments.length) + " Answers:")
+            _c("div", { staticClass: "clearfix" })
           ]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "separator" }),
-      _vm._v(" "),
-      _vm._l(_vm.datacomments, function(item) {
-        return _c("div", { staticClass: "row question-box" }, [
-          _vm.datapost.status == 0
-            ? _c("div", { staticClass: "col-xs-12" }, [
-                item.status == 2
-                  ? _c("div", { staticClass: "col-xs-2 correctOne" }, [
-                      _vm._v("\n               Correct Answer!\n            ")
-                    ])
-                  : _c("div", { staticClass: "col-xs-2" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "margin20bottom col-xs-10" }, [
-                  _c("span", [_vm._v(_vm._s(item.description))])
-                ])
-              ])
-            : _vm.user == _vm.datapost.user_id
-              ? _c("div", { staticClass: "col-xs-12" }, [
-                  _c(
-                    "div",
+          _vm._v(" "),
+          _c("div", { staticClass: "postinfobot" }, [
+            _c("div", { staticClass: "likeblock pull-left" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.datapost.rate_number))]),
+              _vm._v(" "),
+              _vm._m(2)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "prev pull-left" }, [
+              _vm.datapost.status != 0
+                ? _c(
+                    "a",
                     {
-                      staticClass: "col-xs-2 answerContainer",
-                      attrs: {
-                        "data-answer": item.id,
-                        "data-post": item.post_id
-                      },
+                      attrs: { id: "showFormAnswer" },
                       on: {
                         click: function($event) {
-                          _vm.saveAnswer(item)
+                          _vm.showForm()
                         }
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                Select as Correct Answer\n            "
-                      )
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-share-alt reply"
+                      })
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "margin20bottom col-xs-10" }, [
-                    _c("span", [_vm._v(_vm._s(item.description))])
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "posted pull-left" }, [
+              _c("i", { staticClass: "glyphicon glyphicon-time" }),
+              _vm._v(" " + _vm._s(_vm.datapost.created_at))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "clearfix" })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.datacomments, function(item) {
+          return _c("div", { staticClass: "post answer" }, [
+            _c("div", { staticClass: "topwrap" }, [
+              _vm._m(3, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "posttext pull-left" }, [
+                _vm.datapost.status == 0
+                  ? _c("div", [
+                      item.status == 2
+                        ? _c("i", {
+                            staticClass: "glyphicon glyphicon-ok correctAnswer"
+                          })
+                        : _vm._e(),
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(item.description) +
+                          "\n                    "
+                      )
+                    ])
+                  : _c("div", [_vm._v(_vm._s(item.description))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "postinfobot" }, [
+              _c("div", { staticClass: "likeblock pull-left" }, [
+                _vm._m(4, true),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(item.rate_number))]),
+                _vm._v(" "),
+                _vm._m(5, true)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "prev pull-left" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "posted pull-left" }, [
+                _c("i", { staticClass: "glyphicon glyphicon-time" }),
+                _vm._v(" " + _vm._s(_vm.datapost.created_at))
+              ]),
+              _vm._v(" "),
+              _vm.user == _vm.datapost.user_id && _vm.datapost.status != 0
+                ? _c("div", { staticClass: "next pull-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col-xs-2 answerContainer",
+                        attrs: {
+                          "data-answer": item.id,
+                          "data-post": item.post_id
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.saveAnswer(item)
+                          }
+                        }
+                      },
+                      [_vm._m(6, true)]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(7, true)
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" })
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-4 col-md-4" }, [
+      _c("div", { staticClass: "sidebarblock" }, [
+        _c("h3", [_vm._v("Tags")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "divline" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "blocktxt" }, [
+          _c(
+            "ul",
+            { staticClass: "tags" },
+            _vm._l(_vm.datanumbersofposts, function(item) {
+              return _c("li", [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v(_vm._s(item.tag_id)),
+                  _c("span", { staticClass: "badge pull-right" }, [
+                    _vm._v(_vm._s(item.total))
                   ])
                 ])
-              : _c("div", { staticClass: "col-xs-12" }, [
-                  _c("div", { staticClass: "col-xs-2" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "margin20bottom col-xs-10" }, [
-                    _c("span", [_vm._v(_vm._s(item.description))])
-                  ])
-                ])
-        ])
-      }),
-      _vm._v(" "),
-      _vm.datapost.status != 0
-        ? _c(
-            "span",
-            {
-              attrs: { id: "showFormAnswer" },
-              on: {
-                click: function($event) {
-                  _vm.showForm()
-                }
-              }
-            },
-            [_vm._v(" Do you want to answer? Click here")]
+              ])
+            })
           )
-        : _c("span", [_vm._v("You can't answer closed posts.")])
-    ],
-    2
-  )
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "userinfo pull-left" }, [
+      _c("div", { staticClass: "avatar" }, [
+        _c("img", { attrs: { src: "images/avatar.jpg", alt: "" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "status green" }, [_vm._v(" ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "up", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "glyphicon glyphicon-thumbs-up" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "down", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "glyphicon glyphicon-thumbs-down" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "userinfo pull-left" }, [
+      _c("div", { staticClass: "avatar" }, [
+        _c("img", { attrs: { src: "images/avatar.jpg", alt: "" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "status green" }, [_vm._v(" ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "up", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "glyphicon glyphicon-thumbs-up" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "down", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "glyphicon glyphicon-thumbs-down" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "glyphicon glyphicon-ok" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fa fa-flag" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

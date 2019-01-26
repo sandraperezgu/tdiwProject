@@ -1,23 +1,66 @@
 <template>
+
     <div class="container">
         <h1>Last Posts</h1>
-        <hr class="separator" />
+        <hr class="separator"/>
         <div class="row">
-            <div class="col-xs-12" v-for="item in posts">
-                <div class="post_container margin20bottom">
-                    <a v-bind:href="'post/'+item.id">
-                        <div class="row"><div class="col-md-12">
-                            <span v-if="item.status == 0">(CLOSED) {{ item.title }}</span>
-                            <span v-else>{{ item.title }}</span>
+            <div class="col-lg-8 col-md-8" >
+                <!-- POST -->
+
+                <div class="post" v-for="item in posts">
+
+                    <div class="wrap-ut pull-left">
+                        <!-- AVATAR -->
+                        <div class="userinfo pull-left">
+                            <div class="avatar">
+                                <img src="images/avatar.jpg" alt="">
+                                <div class="status green"> </div>
                             </div>
                         </div>
+                        <!-- TITULO DEL POST Y DESCRIPCION -->
+                        <div class="posttext pull-left">
+                            <h2><a v-bind:href="'post/'+item.id">
+                                    <span v-if="item.status == 0">(CLOSED) {{ item.title }}</span>
+                                    <span v-else>{{ item.title }}</span>
+                                </a>
+                            </h2>
+                            <p>{{ item.description }}</p>
 
-                    </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="postinfo pull-left">
+                        <div class="comments">
+                            <div class="commentbg">
+                                0
+                                <div class="mark"></div>
+                            </div>
+                        </div>
+                        <div class="ranking"><i class="glyphicon glyphicon-star"></i>
+                            {{item.rate_number}}
+                        </div>
+                        <div class="created_at"><i class="glyphicon glyphicon-time"></i>
+                            {{item.created_at}}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="sidebarblock">
+                    <h3>Tags</h3>
+                    <div class="divline"></div>
+                    <div class="blocktxt">
+                        <ul class="tags" >
+                            <li v-for="item in datanumbersofposts"><a href="#">{{item.tag_id}}<span class="badge pull-right">{{item.total}}</span></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <pagination :pagination="pagination" :callback="fetchPosts" :options="paginationOptions"></pagination>
     </div>
+
 </template>
 
 <script>
@@ -25,7 +68,12 @@
         mounted() {
             console.log('posts, posts nowhere');
         },
-        data: function() {
+        props: {
+            datanumbersofposts: {
+                type: Array,
+            }
+        },
+        data: function () {
             return {
                 items: [],
                 posts: [],
@@ -49,7 +97,7 @@
             this.fetchPosts();
         },
         methods: {
-            fetchPosts (){
+            fetchPosts() {
                 var page = this.pagination.current_page;
                 console.log(page);
                 axios.get('/api/post?page=' + page).then((response) => {
@@ -59,8 +107,7 @@
                 }, error => {
                     //Error Handling
                 });
-            },
-
+            }
         },
         components: {
             pagination: require('vue-bootstrap-pagination'),

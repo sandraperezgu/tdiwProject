@@ -8,7 +8,7 @@ class Tag extends Model
 {
     //
     public function posts(){
-        return $this->belongsToMany("Post")->using("TagPost");;
+        return $this->belongsToMany("App\Post")->using("App\TagPost");
     }
     protected $table = 'tag';
 }

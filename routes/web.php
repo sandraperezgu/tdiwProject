@@ -37,3 +37,4 @@ Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/account', 'ProfileController@account')->name('account');
 Route::post('/modify', 'ProfileController@modifyAccount')->name('modify');
 Route::get('/admin', 'ProfileController@admin')->name('admin');
+Route::get('/deleteAccount', 'ProfileController@deleteAccount')->name('deleteAccount');

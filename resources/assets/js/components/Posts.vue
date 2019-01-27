@@ -22,7 +22,7 @@
                         <!-- AVATAR -->
                         <div class="userinfo pull-left">
                             <div class="avatar">
-                                <img src="images/avatar.jpg" alt="">
+                                <img v-if="datausers[item.user_id]" v-bind:src="datausers[item.user_id]" alt="">
                                 <div class="status green"> </div>
                             </div>
                         </div>
@@ -41,7 +41,11 @@
 
                     <div class="postinfo pull-left">
                         <div class="comments">
-                            <div class="commentbg">
+                            <div class="commentbg" v-if="datareplies[item.id]>=0">
+                                {{datareplies[item.id]}}
+                                <div class="mark"></div>
+                            </div>
+                            <div class="commentbg" v-else>
                                 0
                                 <div class="mark"></div>
                             </div>
@@ -82,6 +86,12 @@
         props: {
             datanumbersofposts: {
                 type: Array,
+            },
+            datareplies: {
+                type: Object
+            },
+            datausers: {
+                type: Object
             }
         },
         data: function () {

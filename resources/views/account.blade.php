@@ -40,7 +40,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <input type="password" placeholder="Password" name="password"
                                                    class="form-control" id="pass"
-                                                   name="pass">
+                                                   >
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <input type="password" placeholder="Retype Password" class="form-control"
@@ -91,8 +91,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
+                                        <div class="row">
+                                            <div class="pull-right">
+                                                <label> <a class="deactivate" href="{{route('deleteAccount')}}">Deactivate your
+                                                        account</a>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

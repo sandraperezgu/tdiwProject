@@ -407,3 +407,7 @@ input[type=text], input[type=password] {
   margin-bottom: 20px;
 }
 
+.deactivate, .deactivate:hover{
+  color: $down;
+  margin-right: 37px;
+}

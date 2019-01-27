@@ -35,11 +35,13 @@
                         <div class="postinfo pull-left">
                             <div class="comments">
                                 <div class="commentbg">
+                                    @php $total=0 @endphp
                                     @foreach ($replies as $reply)
                                         @if ($post->id == $reply->post_id)
-                                            {{$reply->total}}
+                                            @php $total = $reply->total @endphp
                                         @endif
                                     @endforeach
+                                    {{$total}}
                                     <div class="mark"></div>
                                 </div>
                             </div>

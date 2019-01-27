@@ -1,8 +1,9 @@
 <template>
 
     <div class="container">
-        <h1>Last Posts <input type="search" id="name_search" class="form-control" placeholder="Search questions by title..." style="margin-top: 10px;" />
-        </h1>
+        <h1>Last Posts</h1>
+        <input v-model="inputVal" type="search" id="name_search" class="form-control" placeholder="Search questions by title..." style="margin-top: 10px;" />
+        <button @click="search_query()" id="search_button">Search</button>
         <hr class="separator"/>
         <div class="row">
             <div class="col-lg-8 col-md-8" >
@@ -54,7 +55,7 @@
                     <div class="divline"></div>
                     <div class="blocktxt">
                         <ul class="tags" >
-                            <li v-for="item in datanumbersofposts"><a href="#">{{item.tag_id}}<span class="badge pull-right">{{item.total}}</span></a></li>
+                            <li v-for="item in datanumbersofposts"><a :class="{ selected : tags.includes(item.tag_id) }" v-on:click="addOrRemoveTag(item)">{{item.tag_id}}<span class="badge pull-right">{{item.total}}</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,6 +82,8 @@
             return {
                 items: 0,
                 posts: [],
+                tags: [],
+                inputVal:'',
                 currentPage: 1,
                 per_page: 15,
                 pagination: {
@@ -106,7 +109,6 @@
              */
             currentPage(newVal) {
                 axios.get('/api/post?page=' + newVal).then((response) => {
-                    console.log(response);
                     this.posts = response.data.data;
                     this.pagination = response.data;
                     this.items = response.data.total;
@@ -120,10 +122,8 @@
         },
         methods: {
             fetchPosts() {
-                var page = this.pagination.current_page;
-                console.log(page);
+                var page = this.currentPage;
                 axios.get('/api/post?page=' + page).then((response) => {
-                    console.log(response);
                     this.posts = response.data.data;
                     this.pagination = response.data;
                     this.items = response.data.total;
@@ -131,9 +131,40 @@
                     //Error Handling
                 });
             },
+            search_query(){
+                alert('b');
+                var title = this.inputVal;
+                var tags = this.tags.join();
 
+                /*$.each('.tags li a.selected').each(function(){
+                    tags.push($(this).val());
+                });*/
+                var url = '/api/post?page=' + this.currentPage;
+                if(title != '') url = url +'&title='+title;
+                if(this.tags.length != 0) url = url +'&tags='+tags;
+                console.log(url);
+                axios.get(url).then((response) => {
+                    this.posts = response.data.data;
+                    this.pagination = response.data;
+                    this.items = response.data.total;
+                }, error => {
+                    //Error Handling
+                });
+            },
+            addOrRemoveTag(item){
+                if(item.selected){
+                    item.selected = false;
+                    this.tags.splice(this.tags.indexOf(item.tag_id), 1);
+                }else{
+                    item.selected = true;
+                    this.tags.push(item.tag_id);
+                }
+                console.dir(this.tags);
+            }
         }
     }
+
+
     import bPagination from 'bootstrap-vue/es/components/pagination/pagination';
 
     Vue.component('b-pagination', bPagination);

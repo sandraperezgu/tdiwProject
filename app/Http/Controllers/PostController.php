@@ -38,7 +38,17 @@ class PostController extends Controller
         $pages = $_GET['page'];
         $page_multiplier = $pages - 1;
         $skip = $page_multiplier*$num_posts;
-        $posts =  Post::where('post_id', '=', NULL)->skip($skip)->paginate($num_posts);
+        $posts =  Post::where('post.post_id', '=', NULL);
+        if(isset($_GET['title']) && $_GET['title']){
+            $posts = $posts->where('post.title', 'LIKE', '%'.$_GET['title'].'%');
+        }
+        if(isset($_GET['tags']) && $_GET['tags']){
+            $tags = explode(",",$_GET['tags']);
+            $posts = $posts->join('post_tag', 'post.id', '=', 'post_tag.post_id');
+            //$posts->groupBy('post_tag.post_id')->having('aggregate', '>=', count($tags));
+            $posts = $posts->whereIn('post_tag.tag_id', $tags);
+        }
+        $posts = $posts->skip($skip)->paginate($num_posts);
         return JsonResponse::fromJsonString($posts);
     }
 

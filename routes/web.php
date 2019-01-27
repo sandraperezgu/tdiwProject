@@ -33,3 +33,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
 Route::post('/new_answer/{id}', 'PostController@newAnswer');
 Route::get('/profile', 'ProfileController@profile')->name('profile');
+Route::get('/account', 'ProfileController@account')->name('account');
+Route::post('/modify', 'ProfileController@modifyAccount')->name('modify');

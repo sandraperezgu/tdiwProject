@@ -13,7 +13,7 @@
                             <!-- AVATAR -->
                             <div class="userinfo pull-left">
                                 <div class="avatar">
-                                    <img src="images/avatar.jpg" alt="">
+                                    <img src="{{ asset($user->logo_path) }}" alt="">
                                     <div class="status green"></div>
                                 </div>
                             </div>

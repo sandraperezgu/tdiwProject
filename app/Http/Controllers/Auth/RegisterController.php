@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'reputation'=>0,
             'visits_number'=>0,
-            'logo_path'=>''
+            'logo_path'=> 'images/users/boy.png'
         ]);
     }
 }

@@ -166,7 +166,7 @@ class PostController extends Controller
     public function searchPost(){
         $title = $_GET['title'];
         $limit = (isset($_GET['limit']) && $_GET['limit']) ? $_GET['limit'] : 3;
-        $posts =  Post::where('title', 'LIKE', '%'.$title.'%')->limit($limit)->get();
+        $posts =  Post::whereNull('post_id')->where('title', 'LIKE', '%'.$title.'%')->limit($limit)->get();
         return JsonResponse::fromJsonString($posts);
     }
     public function createPost(){

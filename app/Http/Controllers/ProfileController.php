@@ -136,13 +136,21 @@ class ProfileController extends Controller
                     ['id', '=', $id]
                 ])->delete();
             }catch(\Exception $exception){
-                $code = $exception;
+                $code = 500;
             }
             $request->session()->flash('alert-success', 'Post is deleted successfully.');
-        }else if($class == 'tag'){
-
+        }else if($class == 'tags'){
+            try{
+            DB::table('post_tag')->where('tag_id', $id)->delete();
+            DB::table('tag')->where([
+                ['name', '=', $id]
+            ])->delete();
+        }catch(\Exception $exception){
+            $code = 500;
+        }
+            $request->session()->flash('alert-success', 'Tag is deleted successfully.');
         }else{
-            $code = 502;
+            $code = 500;
         }
         return response()->json([
             'status' => $code,

@@ -43,7 +43,8 @@
                         <ul class="tags">
                             @foreach($numberOfPosts as $number)
                                     <li>
-                                        <a href="#">{{$number->tag_id}}
+                                        <a href="#">{{$number->tag_id}}<i class="glyphicon glyphicon-remove icon_delete" attr-class="tags" attr-id="{{$number->tag_id}}"></i>
+
                                             <span class="badge pull-right">{{$number->total}}</span>
                                         </a>
                                     </li>

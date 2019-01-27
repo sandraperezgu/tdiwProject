@@ -112,7 +112,19 @@ class PostController extends Controller
             ->select('tag_id', DB::raw('count(*) as total'))
             ->groupBy('tag_id')
             ->get();
-        return view('post', ['post' => $post, 'comments' => $comments, 'tags' => $tags, 'numberOfPosts' => $numberOfPosts]);
+
+        $users = DB::table('users')
+            ->select('id', 'logo_path')
+            ->whereNotNull('logo_path')
+            ->get();
+
+        $usersArray = array();
+
+        foreach ($users as $user) {
+            $usersArray[$user->id] = $user->logo_path;
+        }
+
+        return view('post', ['post' => $post, 'comments' => $comments, 'tags' => $tags, 'numberOfPosts' => $numberOfPosts, 'users' => $usersArray]);
     }
 
     public function votePost(Request $request)

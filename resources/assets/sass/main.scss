@@ -349,12 +349,12 @@ ul.tags li a.selected{
 
 
 #search_layer{
-  background-color: white;
-  border: 1px solid black;
+  background-color: $navbar-default-bg;
+  border: 1px solid $border-post;
   position: absolute;
 }
 #search_layer div{
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $border-post;
   max-height:40px;
   overflow:hidden;
 }

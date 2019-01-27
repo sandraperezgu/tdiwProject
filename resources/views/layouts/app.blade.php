@@ -98,6 +98,16 @@
     <script>
         var url = "{{route('search_post')}}";
         var post = "{{route('post',['id'=>1])}}";
+
+
+
+        $(document).click(function () {
+
+            $('#search_layer').hide();
+        });
+
+
+
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>

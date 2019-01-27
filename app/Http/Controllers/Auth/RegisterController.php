@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'reputation'=>0,
             'visits_number'=>0,
             'logo_path'=> 'images/users/boy.png'
-        ]);
+
+        ])->fill(['logo_path' => 'images/users/boy.png']);
     }
 }

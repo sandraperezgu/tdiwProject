@@ -6,7 +6,7 @@
                 <div class="topwrap">
                     <div class="userinfo pull-left">
                         <div class="avatar">
-                            <img src="images/avatar.jpg" alt="">
+                            <img v-if="datausers[datapost.user_id]" v-bind:src="'../'+datausers[datapost.user_id]" alt="">
                             <div class="status green">&nbsp;</div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="topwrap">
                     <div class="userinfo pull-left">
                         <div class="avatar">
-                            <img src="images/avatar.jpg" alt="">
+                            <img v-if="datausers[item.user_id]" v-bind:src="'../'+datausers[item.user_id]" alt="">
                             <div class="status green">&nbsp;</div>
                         </div>
                     </div>
@@ -114,6 +114,9 @@
             },
             datanumbersofposts: {
                 type: Array,
+            },
+            datausers: {
+                type: Object
             }
         },
         methods: {

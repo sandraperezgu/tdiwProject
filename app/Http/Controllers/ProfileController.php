@@ -180,7 +180,14 @@ class ProfileController extends Controller
     {
         if (Auth::check()) {
             $id = Auth::user()->id;
-            DB::table('users')->where('id', $id)->delete();
+            $hasPosts = DB::table('post')->where('user_id', $id)->get();
+
+            if($hasPosts->first()){
+                return redirect('account');
+            }else{
+                DB::table('users')->where('id', $id)->delete();
+            }
+
         }
         return redirect('/');
 

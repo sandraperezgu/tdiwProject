@@ -3,10 +3,10 @@
 @section('content')
     @if (Auth::check())
         <post-detail :user="{{ Auth::user()->id }}" :datapost="{{ $post->toJson() }}"
-                     :datacomments="{{ $comments->toJson() }}" :datanumbersofposts="{{ $numberOfPosts->toJson() }}"></post-detail>
+                     :datacomments="{{ $comments->toJson() }}" :datanumbersofposts="{{ $numberOfPosts->toJson() }}" :datausers="{{ json_encode($users) }}"></post-detail>
     @else
         <post-detail :user="0" :datapost="{{ $post->toJson() }}" :datacomments="{{ $comments->toJson() }}"
-                     :datanumbersofposts="{{ $numberOfPosts->toJson() }}"></post-detail>
+                     :datanumbersofposts="{{ $numberOfPosts->toJson() }}" :datausers="{{ json_encode($users) }}"></post-detail>
 
     @endif
     <div class="post" id="form_test" style="display:none;">

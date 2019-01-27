@@ -31,6 +31,7 @@ Route::get('/post/{id}', 'PostController@show')->name('post');
 Route::post('/setanswer','PostController@setAnswer');
 Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
 Route::post('/new_answer/{id}', 'PostController@newAnswer');
+Route::get('/vote_post', 'PostController@votePost')->name('vote_post');
 Route::get('/delete_row','ProfileController@deleteRow')->name('delete_row');
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/account', 'ProfileController@account')->name('account');

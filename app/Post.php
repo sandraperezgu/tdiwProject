@@ -12,5 +12,8 @@ class Post extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class)->using(TagPost::class);
     }
+    public function votes(){
+        return $this->belongsToMany("App\User")->using("App\Post_score");
+    }
     protected $table = 'post';
 }

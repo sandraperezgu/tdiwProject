@@ -20,9 +20,9 @@
                 <div class="postinfobot">
 
                     <div class="likeblock pull-left">
-                        <a href="#" class="up"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                        <a @click="vote(1,datapost.id)" href="#" class="up"><i class="glyphicon glyphicon-thumbs-up"></i></a>
                         <span>{{datapost.rate_number}}</span>
-                        <a href="#" class="down"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+                        <a @click="vote(-1,datapost.id)" href="#" class="down"><i class="glyphicon glyphicon-thumbs-down"></i></a>
                     </div>
 
                     <div class="prev pull-left">
@@ -57,9 +57,9 @@
                 <div class="postinfobot">
 
                     <div class="likeblock pull-left">
-                        <a href="#" class="up"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                        <a @click="vote(1,item.id)" href="#" class="up"><i class="glyphicon glyphicon-thumbs-up"></i></a>
                         <span>{{item.rate_number}}</span>
-                        <a href="#" class="down"><i class="glyphicon glyphicon-thumbs-down"></i></a>
+                        <a @click="vote(-1,item.id)" href="#" class="down"><i class="glyphicon glyphicon-thumbs-down"></i></a>
                     </div>
 
                     <div class="prev pull-left">
@@ -129,7 +129,15 @@
             showForm() {
                 window.$('#form_test').appendTo('#cont');
                 window.$('#form_test').show();
-            }
+            },
+            vote(vote,post_id){
+                var url = '/vote_post?post_id=' + post_id + "&vote="+vote;
+                axios.get(url).then((response) => {
+                    location.reload();
+                }, error => {
+                    //Error Handling
+                });
+            },
         },
     }
 </script>

@@ -91,7 +91,24 @@ class PostController extends Controller
             ->get();
         return view('post', ['post' => $post,'comments'=>$comments, 'tags'=>$tags, 'numberOfPosts'=> $numberOfPosts]);
     }
+    public function votePost(Request $request){
+        if($request->has('post_id') && Auth::check()){
+            $user_id = Auth::user()->id;
+            $post_id = $request->get('post_id');
 
+            $vote = $request->get('vote');
+            $post = Post::where('id', $post_id)->firstOrFail();
+            $already_voted = DB::table('post_user')->where("post_id", "=", $post_id)->where("user_id", "=", $user_id)->get();
+            if($post && !$already_voted->first()){
+                $post->votes()->attach(Auth::user());
+                if($vote == 1) $post->rate_number = $post->rate_number+1;
+                else $post->rate_number = $post->rate_number-1;
+                $post->save();
+            }
+            return response()->json(true);
+        }
+        return response()->json(false);
+    }
     /**
      * Show the form for editing the specified resource.
      *

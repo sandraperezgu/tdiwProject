@@ -132,6 +132,7 @@ class ProfileController extends Controller
             try {
                 Post::where('post_id', $id)->delete();
                 DB::table('post_tag')->where('post_id', $id)->delete();
+                DB::table('post_user')->where('post_id', $id)->delete();
                 DB::table('post')->whereNull('post_id')->where([
                     ['id', '=', $id]
                 ])->delete();

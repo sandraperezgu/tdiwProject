@@ -2,8 +2,15 @@
 
     <div class="container">
         <h1>Last Posts</h1>
-        <input v-model="inputVal" type="search" id="name_search" class="form-control" placeholder="Search questions by title..." style="margin-top: 10px;" />
-        <button @click="search_query()" id="search_button">Search</button>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <input v-model="inputVal" type="search" id="name_search" class="form-control" placeholder="Search questions by title..." />
+            </div>
+            <div class="col-xs-6 col-sm-4">
+            <button @click="search_query()" id="search_button" class="btn btn-primary">Search</button>
+            <a href="/" class="btn btn-primary">Clean filters</a>
+            </div>
+        </div>
         <hr class="separator"/>
         <div class="row">
             <div class="col-lg-8 col-md-8" >
@@ -51,7 +58,7 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="sidebarblock">
-                    <h3>Tags</h3>
+                    <h3>Filter by Tags</h3>
                     <div class="divline"></div>
                     <div class="blocktxt">
                         <ul class="tags" >
@@ -132,17 +139,14 @@
                 });
             },
             search_query(){
-                alert('b');
                 var title = this.inputVal;
                 var tags = this.tags.join();
-
                 /*$.each('.tags li a.selected').each(function(){
                     tags.push($(this).val());
                 });*/
                 var url = '/api/post?page=' + this.currentPage;
                 if(title != '') url = url +'&title='+title;
                 if(this.tags.length != 0) url = url +'&tags='+tags;
-                console.log(url);
                 axios.get(url).then((response) => {
                     this.posts = response.data.data;
                     this.pagination = response.data;
@@ -159,7 +163,6 @@
                     item.selected = true;
                     this.tags.push(item.tag_id);
                 }
-                console.dir(this.tags);
             }
         }
     }

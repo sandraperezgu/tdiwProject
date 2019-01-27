@@ -29,9 +29,10 @@ Route::get('/new_post', function () {
 Route::post('/new_post', 'PostController@createPost')->name('new_post');
 Route::get('/post/{id}', 'PostController@show')->name('post');
 Route::post('/setanswer','PostController@setAnswer');
-Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/new_answer','PostController@newAnswer')->name('new_answer');
 Route::post('/new_answer/{id}', 'PostController@newAnswer');
+Route::get('/delete_row','ProfileController@deleteRow')->name('delete_row');
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/account', 'ProfileController@account')->name('account');
 Route::post('/modify', 'ProfileController@modifyAccount')->name('modify');
+Route::get('/admin', 'ProfileController@admin')->name('admin');

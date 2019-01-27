@@ -78,7 +78,6 @@
     export default {
 
         mounted() {
-            console.log('posts, posts nowhere');
         },
         props: {
             datanumbersofposts: {

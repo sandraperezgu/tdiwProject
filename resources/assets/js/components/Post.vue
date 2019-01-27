@@ -101,7 +101,6 @@
 <script>
     export default {
         mounted() {
-            console.log('posts, posts nowhere');
         },
         props: {
             datapost: {
@@ -133,8 +132,6 @@
             }
         },
     }
-    console.log('posts, posts nowhere');
-
 </script>
 
 <style scoped>

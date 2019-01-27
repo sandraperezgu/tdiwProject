@@ -339,7 +339,10 @@ ul.tags li a.selected{
   font-family: $font-family-sans-serif;
   border: none;
 }
-
+.icon_delete{
+  cursor: pointer;
+  color: $down;
+}
 .avatar .red {
   background-color: $down;
 }

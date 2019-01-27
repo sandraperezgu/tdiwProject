@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-
+    const ROLE_ADMIN = 1;
     /**
      * Show the application dashboard.
      *
@@ -109,6 +109,43 @@ class ProfileController extends Controller
 
         return redirect('/account');
     }
+    public function admin()
+    {
+        if(!Auth::user() || Auth::user()->role_id != ProfileController::ROLE_ADMIN) return view('welcome');
+        $posts = DB::table('post')->whereNull('post_id')->get();
+
+        $tags = DB::table('tag')->get();
+
+        $numberOfPosts = DB::table('post_tag')
+            ->select('tag_id', DB::raw('count(*) as total'))
+            ->groupBy('tag_id')
+            ->get();
 
 
+        return view('admin', ['posts' => $posts, 'tags' => $tags,'numberOfPosts'=> $numberOfPosts]);
+    }
+    public function deleteRow(Request $request){
+        $class = $request->get('class_selected');
+        $id = $request->get('id');
+        $code = 200;
+        if($class == 'post'){
+            try {
+                Post::where('post_id', $id)->delete();
+                DB::table('post_tag')->where('post_id', $id)->delete();
+                DB::table('post')->whereNull('post_id')->where([
+                    ['id', '=', $id]
+                ])->delete();
+            }catch(\Exception $exception){
+                $code = $exception;
+            }
+            $request->session()->flash('alert-success', 'Post is deleted successfully.');
+        }else if($class == 'tag'){
+
+        }else{
+            $code = 502;
+        }
+        return response()->json([
+            'status' => $code,
+        ]);
+    }
 }
